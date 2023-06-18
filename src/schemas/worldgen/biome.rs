@@ -62,7 +62,7 @@ pub struct CustomeBiome {
 
 
 /// Modification methods applied to temperature before calculating the height adjusted temperature
-#[derive(Deserialize, Serialize, Debug, Clone, PartialEq)]
+#[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum TemperatureModifier {
     
@@ -147,7 +147,7 @@ pub struct Effects {
 
 
 /// Modification methods applied to grass color.
-#[derive(Deserialize, Serialize, Debug, Clone, PartialEq)]
+#[derive(Deserialize, Serialize, Debug, Clone, Copy, PartialEq)]
 #[serde(rename_all = "snake_case")]
 pub enum EffectsGrassColorModifier {
 
