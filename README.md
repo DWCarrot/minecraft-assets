@@ -53,6 +53,7 @@ This library is `#![warn(missing_docs)]`, so the documentation is very complete:
 - [ ] `data/<namespace>/recipes/*.json`
 - [ ] `data/<namespace>/structures/**/*.json`
 - [ ] `data/<namespace>/tags/**/*.json`
+- [ ] `data/<namespace>/worldgen/biome/*.json` _incomplete_ 
 
 ## Projects using `minecraft-assets`
 

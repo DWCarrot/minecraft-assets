@@ -17,6 +17,9 @@ pub enum ResourceKind {
 
     /// Resources (`.png.mcmeta`) in `assets/<namespace>/textures/`.
     TextureMeta,
+
+    /// Resources (`.json`) in `data/<namespace>/worldgen/biome/`.
+    WorldGen_Biome,
 }
 
 impl ResourceKind {
@@ -28,6 +31,7 @@ impl ResourceKind {
             | Self::ItemModel
             | Self::Texture
             | Self::TextureMeta => ResourceCategory::Assets,
+            Self::WorldGen_Biome => ResourceCategory::Data,
         }
     }
 
@@ -48,7 +52,7 @@ impl ResourceKind {
     /// ```
     pub fn extension(&self) -> &'static str {
         match self {
-            Self::BlockStates | Self::BlockModel | Self::ItemModel => "json",
+            Self::BlockStates | Self::BlockModel | Self::ItemModel | Self::WorldGen_Biome => "json",
             Self::Texture => "png",
             Self::TextureMeta => "png.mcmeta",
         }
@@ -62,6 +66,7 @@ impl ResourceKind {
             Self::BlockModel => "models/block",
             Self::ItemModel => "models/item",
             Self::Texture | Self::TextureMeta => "textures",
+            Self::WorldGen_Biome => "worldgen/biome",
         }
     }
 }

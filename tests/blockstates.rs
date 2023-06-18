@@ -1,4 +1,4 @@
-#![cfg(feature = "tests")]
+#![cfg(feature = "tests-blockstates")]
 
 use assert_matches::assert_matches;
 use maplit::hashmap;

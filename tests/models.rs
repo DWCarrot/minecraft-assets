@@ -1,4 +1,4 @@
-#![cfg(feature = "tests")]
+#![cfg(feature = "tests-models")]
 
 use maplit::hashmap;
 

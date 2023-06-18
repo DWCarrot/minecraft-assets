@@ -4,6 +4,7 @@
 pub mod blockstates;
 pub mod texture;
 pub mod models;
+pub mod worldgen;
 
 pub use blockstates::BlockStates;
 pub use models::Model;

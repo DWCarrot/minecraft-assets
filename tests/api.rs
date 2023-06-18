@@ -1,4 +1,4 @@
-#![cfg(feature = "tests")]
+#![cfg(feature = "tests-api")]
 
 use assert_matches::assert_matches;
 use std::{io, path::PathBuf};

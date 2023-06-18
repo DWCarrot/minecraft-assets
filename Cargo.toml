@@ -28,4 +28,13 @@ default = []
 
 # Enables the integration tests in the `tests/` directory.
 # These tests require fetching the `minecraft-assets` submodule.
-tests = []
+tests = [
+    "tests-api",
+    "tests-blockstates",
+    "tests-models",
+    "tests-worldgen-biome",
+]
+tests-api = []
+tests-blockstates = []
+tests-models = []
+tests-worldgen-biome = []
