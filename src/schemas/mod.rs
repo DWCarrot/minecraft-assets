@@ -2,9 +2,9 @@
 //! directory.
 
 pub mod blockstates;
-pub mod texture;
 pub mod models;
 pub mod worldgen;
+pub mod texture;
 
 pub use blockstates::BlockStates;
 pub use models::Model;

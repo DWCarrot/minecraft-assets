@@ -87,11 +87,7 @@ impl BlockStates {
 
             Self::Variants { variants } => {
                 if variants.len() == 1 {
-                    let variant = variants
-                        .into_iter()
-                        .map(|(_, variant)| variant)
-                        .next()
-                        .unwrap();
+                    let variant = variants.into_values().next().unwrap();
 
                     let case = multipart::Case {
                         when: None,
@@ -295,6 +291,13 @@ pub mod multipart {
             #[serde(rename = "OR")]
             or: Vec<Condition>,
         },
+
+        /// A `when` clause that is true when all of the given conditions are true
+        And {
+            /// The conditions in the `AND` clause.
+            #[serde(rename = "AND")]
+            and: Vec<Condition>,
+        },
     }
 
     impl WhenClause {
@@ -306,6 +309,7 @@ pub mod multipart {
             match self {
                 Self::Single(condition) => std::slice::from_ref(condition),
                 Self::Or { or } => &or[..],
+                Self::And { and } => &and[..],
             }
         }
 
@@ -317,9 +321,13 @@ pub mod multipart {
         where
             I: IntoIterator<Item = (&'a str, &'a StateValue)> + Clone,
         {
-            self.conditions()
-                .iter()
-                .any(|condition| condition.applies(state_values.clone()))
+            let mut iter = self.conditions().iter();
+
+            if let Self::And { .. } = self {
+                iter.all(|condition| condition.applies(state_values.clone()))
+            } else {
+                iter.any(|condition| condition.applies(state_values.clone()))
+            }
         }
     }
 
@@ -398,7 +406,7 @@ pub mod multipart {
     /// "when": {"north": "side|up", "east": false }
     ///                   ^^^^^^^^^          ^^^^^
     /// ```
-    #[derive(Deserialize, Serialize, Debug, Clone)]
+    #[derive(Deserialize, Serialize, Debug, Clone, Hash, Eq)]
     #[serde(untagged)]
     pub enum StateValue {
         /// Unquoted bool value.
